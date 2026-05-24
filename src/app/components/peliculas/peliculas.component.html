@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row">
+
+    <div class="col-md-4" *ngFor="let peli of peliculas">
+
+        <div class="card mb-3">
+
+        <img [src]="peli.image" class="card-img-top">
+
+        <div class="card-body">
+
+            <h5>{{ peli.title }}</h5>
+
+            <p>{{ peli.year }}</p>
+
+        </div>
+
+        </div>
+
+    </div>
+
+    </div>
+</body>
+</html>
