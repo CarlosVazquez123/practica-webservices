@@ -1,0 +1,18 @@
+<div class="container mt-5 text-center">
+  <h2 class="fw-bold">Generador de QR</h2>
+  <div class="card p-4 shadow-sm mx-auto" style="max-width: 400px;">
+    <input type="text" class="form-control mb-3" 
+           [(ngModel)]="texto" placeholder="Escribí tu URL o texto...">
+    
+    <button class="btn btn-primary w-100" (click)="generar()">
+      Generar Código QR
+    </button>
+
+    <div class="mt-4">
+      @if (qrBase64) {
+        <p class="text-muted">Tu código generado:</p>
+        <img [src]="qrBase64" alt="Código QR" class="img-fluid border p-2">
+      }
+    </div>
+  </div>
+</div>

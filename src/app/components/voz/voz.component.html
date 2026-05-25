@@ -1,0 +1,52 @@
+<div class="container mt-5 mb-5 d-flex justify-content-center">
+  <div class="card shadow-lg border-secondary" style="max-width: 600px; width: 100%;">
+    
+    <div class="card-header bg-info text-white text-center py-3">
+      <h3 class="mb-0 fw-bold"><i class="bi bi-megaphone-fill me-2"></i>Texto a Voz (OpenAI)</h3>
+    </div>
+    
+    <div class="card-body bg-dark text-white p-4">
+      
+      <div class="mb-4">
+        <label class="form-label text-warning fw-bold">Escribí tu mensaje:</label>
+        <textarea class="form-control bg-light" rows="4" 
+                  [(ngModel)]="textoIngresado" 
+                  placeholder="Escribí acá lo que querés que lea la IA..."></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label text-warning fw-bold">Elegí el tipo de voz:</label>
+        <select class="form-select border-secondary bg-secondary text-white fw-bold" 
+                [(ngModel)]="vozSeleccionada">
+          @for (voz of vocesDisponibles; track $index) {
+            <option [value]="voz">{{ voz | uppercase }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="d-grid gap-2 mb-4">
+        <button class="btn btn-info fw-bold btn-lg" 
+                (click)="generarAudio()" 
+                [disabled]="cargando || textoIngresado.trim() === ''">
+          @if (cargando) {
+            <span class="spinner-border spinner-border-sm me-2"></span> Sintetizando audio...
+          } @else {
+            <i class="bi bi-play-circle-fill me-2"></i> Generar Audio
+          }
+        </button>
+      </div>
+
+      @if (audioUrl) {
+        <div class="text-center mt-4 p-3 border border-info rounded bg-secondary">
+          <p class="text-light mb-2 fw-semibold">¡Audio listo para reproducir!</p>
+          
+          <audio controls class="w-100" [src]="audioUrl">
+            Tu navegador no soporta el elemento de audio.
+          </audio>
+          
+        </div>
+      }
+
+    </div>
+  </div>
+</div>

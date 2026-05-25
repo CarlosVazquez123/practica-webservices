@@ -1,0 +1,58 @@
+<div class="container mb-5 mt-4">
+  <h2 class="text-center fw-bold mb-4 text-primary">Marcas de Autos</h2>
+  
+  <div class="row g-4">
+    @for (marca of listaMarcas; track $index) {
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card h-100 shadow-sm border-secondary text-center">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-dark">{{ marca.name || marca }}</h5>
+            
+            <button class="btn btn-outline-primary mt-3" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modalModelos"
+                    (click)="abrirModalModelos(marca.id, marca.name)">
+                    Ver Modelos
+            </button>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="col-12 text-center mt-5 text-muted">
+        Cargando marcas del mercado...
+      </div>
+    }
+  </div>
+</div>
+
+<div class="modal fade" id="modalModelos" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title fw-bold" id="modalLabel">Modelos de {{ marcaSeleccionada }}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        @if (listaModelos.length > 0) {
+          <ul class="list-group list-group-flush">
+            @for (modelo of listaModelos; track $index) {
+              <li class="list-group-item">{{ modelo.name || modelo }}</li>
+            }
+          </ul>
+        } @else {
+          <div class="text-center p-3 text-muted">
+            <div class="spinner-border spinner-border-sm text-primary me-2" role="status"></div>
+            Buscando modelos...
+          </div>
+        }
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
